@@ -3,14 +3,16 @@ import "./Cube.css";
 
 function Cube() {
 
-    const [cube, setCube] = useState({
+    const initialState={
         front: Array(3).fill(null).map(() => Array(3).fill("white")),
         back: Array(3).fill(null).map(() => Array(3).fill("yellow")),
         top: Array(3).fill(null).map(() => Array(3).fill("blue")),
         bottom: Array(3).fill(null).map(() => Array(3).fill("green")),
         left: Array(3).fill(null).map(() => Array(3).fill("orange")),
         right: Array(3).fill(null).map(() => Array(3).fill("red")),
-    });
+    };
+
+    const [cube, setCube] = useState(initialState);
 
     const rotateMatrixClockwise = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[i]).reverse());
     const rotateMatrixCounterClockwise = (matrix) => matrix[0].map((_, i) => matrix.map(row => row[matrix.length - 1 - i]));
@@ -148,6 +150,10 @@ function Cube() {
         });
     };
 
+    const handleReset=()=>{
+        setCube(initialState);
+    }
+
     const renderFace = (faceName) => (
         <div className="face">
         {cube[faceName].map((row, rowIndex) => (
@@ -188,6 +194,7 @@ function Cube() {
                     {move}
                 </button>
                 ))}
+                <button className="reset" onClick={handleReset}>Reset</button>
             </div>
             <div className="symbolesExplanation">
                 <p><strong>F</strong> → Rotate the <strong>Front face</strong> clockwise (as if you're facing it)</p>

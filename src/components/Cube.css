@@ -42,9 +42,12 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
 .controls button:hover {
   background: #ddd;
+}
+
+.reset{
+  margin-left: 100px;
 }
 
 h2{
